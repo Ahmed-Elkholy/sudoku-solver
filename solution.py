@@ -36,27 +36,23 @@ def naked_twins(values):
     dict
         The values dictionary with the naked twins eliminated from peers
 
-    Notes
-    -----
-    Your solution can either process all pairs of naked twins from the input once,
-    or it can continue processing pairs of naked twins until there are no such
-    pairs remaining -- the project assistant test suite will accept either
-    convention. However, it will not accept code that does not process all pairs
-    of naked twins from the original input. (For example, if you start processing
-    pairs of twins and eliminate another pair of twins before the second pair
-    is processed then your code will fail the PA test suite.)
-
-    The first convention is preferred for consistency with the other strategies,
-    and because it is simpler (since the reduce_puzzle function already calls this
-    strategy repeatedly).
-
     See Also
     --------
     Pseudocode for this algorithm on github:
     https://github.com/udacity/artificial-intelligence/blob/master/Projects/1_Sudoku/pseudocode.md
     """
-    # TODO: Implement this function!
-    raise NotImplementedError
+    # deep copy to avoid propagation (we need to check the values of the unmodified version)
+    out = values.copy()
+	for boxA in values.keys():
+        if len(values[boxA]) != 2:
+            continue
+        visited.add(boxA)
+        for boxB in peers[boxA]:
+            if len(values[boxB]) == 2 and values[boxB] == values[boxA]:
+                for peer in peers[boxA].intersection(peers[boxB]):
+                    for digit in values[boxA]:
+                        out[peer] = out[peer].replace(digit, "")
+    return out
 
 
 def eliminate(values):
@@ -101,9 +97,6 @@ def only_choice(values):
     dict
         The values dictionary with all single-valued boxes assigned
 
-    Notes
-    -----
-    You should be able to complete this function by copying your code from the classroom
     """
 	for unit in unitlist:
 	for digit in "123456789":
@@ -162,10 +155,6 @@ def search(values):
     dict or False
         The values dictionary with all boxes assigned or False
 
-    Notes
-    -----
-    You should be able to complete this function by copying your code from the classroom
-    and extending it to call the naked twins strategy.
     """
     # First, reduce the puzzle using the previous function
     values = reduce_puzzle(values)
