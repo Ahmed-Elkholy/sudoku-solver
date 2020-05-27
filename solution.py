@@ -41,19 +41,22 @@ def naked_twins(values):
     Pseudocode for this algorithm on github:
     https://github.com/udacity/artificial-intelligence/blob/master/Projects/1_Sudoku/pseudocode.md
     """
+	# maintain a set of visited boxes to avoid duplicate work
+    visited = set()
     # deep copy to avoid propagation (we need to check the values of the unmodified version)
     out = values.copy()
-	for boxA in values.keys():
+    for boxA in values.keys():
         if len(values[boxA]) != 2:
             continue
         visited.add(boxA)
         for boxB in peers[boxA]:
+            if boxB in visited:
+                continue
             if len(values[boxB]) == 2 and values[boxB] == values[boxA]:
                 for peer in peers[boxA].intersection(peers[boxB]):
                     for digit in values[boxA]:
                         out[peer] = out[peer].replace(digit, "")
     return out
-
 
 def eliminate(values):
     """Apply the eliminate strategy to a Sudoku puzzle
