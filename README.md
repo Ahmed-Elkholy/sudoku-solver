@@ -10,15 +10,15 @@ Dependencies:
 
 If you face any issues in the enviroment, I recommend creating a virtual enviroment by following these steps:
 
-Install virualenv package:
+#### Install virualenv package
 ```bash
 $ pip install virtualenv
 ```
-Create the virtual environment
+#### Create the virtual environment
 ```bash
 $ virtualenv sudoku
 ```
-Activate the virtual environment:
+#### Activate the virtual environment
 
 ##### Windows
 ```bash
@@ -28,19 +28,19 @@ $ activate
 ```bash
 $ source activate
 ```
-Install packages using pip:
+#### Install packages using pip
 ```bash
 $ pip install -r requirements.txt
 ```
 
 ## Usage
-To run the project:
+#### To run the project
 ```bash
 $ python solution.py
 ```
-To run the unit tests:
+#### To run the unit tests
 ```bash
-$ python python -m unittest -v
+$ python -m unittest -v
 ```
 ## License
 The contents of this repository are covered under the [MIT License](LICENSE)
